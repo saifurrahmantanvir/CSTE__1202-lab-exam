@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main()
+int appendTextInFile()
 {
   char text[] = "Programming with file is fun\n";
 
@@ -34,6 +34,45 @@ int main()
   }
 
   printf("Text read successfully.\n");
+
+  return 0;
+}
+
+// ** C program to find the size of a file
+int getFileSize()
+{
+  long size;
+  char filename[100];
+
+  printf("Enter the filename: ");
+  scanf("%s", filename);
+
+  FILE *file = fopen(filename, "r");
+
+  if (file == NULL)
+  {
+    printf("Error opening the file.\n");
+    return 1;
+  }
+
+  fseek(file, 0, SEEK_END);
+  size = ftell(file);
+
+  fclose(file);
+
+  printf("Size of the file %s is: %ld bytes\n", filename, size);
+
+  return 0;
+}
+
+void hof(int (*f)())
+{
+  f();
+}
+
+int main()
+{
+  hof(getFileSize);
 
   return 0;
 }
